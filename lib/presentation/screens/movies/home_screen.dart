@@ -33,18 +33,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
 
     return Column(
-      children: [
-        CustomAppbar(),
-        Expanded(
-          child: ListView.builder(
-            itemCount: nowPlayingMovies.length,
-            itemBuilder: (context, index) {
-              final movie = nowPlayingMovies[index];
-              return ListTile(title: Text(movie.title));
-            },
-          ),
-        ),
-      ],
+      children: [CustomAppbar(), MoviesSlideshow(movies: nowPlayingMovies),],
     );
   }
 }
