@@ -32,6 +32,8 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     super.initState();
     ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
     ref.read(popularMoviesProvider.notifier).loadNextPage();
+    ref.read(topRatedMoviesProvider.notifier).loadNextPage();
+    ref.read(upcomingMoviesProvider.notifier).loadNextPage();
   }
 
   @override
@@ -39,6 +41,8 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final moviesSlideshow = ref.watch(moviesSlideshowProvider);
     final popularMovies = ref.watch(popularMoviesProvider);
+    final topRatedMovies = ref.watch(topRatedMoviesProvider);
+    final upcomingMovies = ref.watch(upcomingMoviesProvider);
 
     return CustomScrollView(
       slivers: [
@@ -64,13 +68,13 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                       },
                 ),
                 MovieHorizontalListview(
-                  movies: nowPlayingMovies,
+                  movies: upcomingMovies,
                   title: "Proximamente",
                   subTitle: "En este mes",
                   loadNextPage:
                       () => {
                         ref
-                            .read(nowPlayingMoviesProvider.notifier)
+                            .read(upcomingMoviesProvider.notifier)
                             .loadNextPage(),
                       },
                 ),
@@ -86,12 +90,12 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                 ),
 
                 MovieHorizontalListview(
-                  movies: nowPlayingMovies,
+                  movies: topRatedMovies,
                   title: "Mejores Calificadas",
                   loadNextPage:
                       () => {
                         ref
-                            .read(nowPlayingMoviesProvider.notifier)
+                            .read(topRatedMoviesProvider.notifier)
                             .loadNextPage(),
                       },
                 ),
