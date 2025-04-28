@@ -27,7 +27,6 @@ class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     scrollController.addListener(() {
@@ -35,7 +34,7 @@ class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
 
       if (scrollController.position.pixels + 200 >=
           scrollController.position.maxScrollExtent) {
-        print('load next movies');
+        // print('load next movies');
 
         widget.loadNextPage!();
       }
@@ -51,7 +50,7 @@ class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 450,
+      height: 360,
       child: Column(
         children: [
           if (widget.title != null || widget.subTitle != null)
