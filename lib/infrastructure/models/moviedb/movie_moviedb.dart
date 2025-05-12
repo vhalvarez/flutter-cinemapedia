@@ -58,6 +58,7 @@ class MovieFromMovieDB {
         "overview": overview,
         "popularity": popularity,
         "poster_path": posterPath,
+        // ignore: unnecessary_null_comparison
         "release_date": (releaseDate != null) ? "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}" : null,
         "title": title,
         "video": video,
