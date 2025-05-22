@@ -41,7 +41,9 @@ class MovieFromMovieDB {
         overview: json["overview"] ?? '',
         popularity: json["popularity"]?.toDouble(),
         posterPath: json["poster_path"] ?? '',
-        releaseDate: DateTime.parse(json["release_date"]),
+        releaseDate: json["release_date"] != null && json["release_date"].toString().isNotEmpty
+            ? DateTime.tryParse(json["release_date"]) ?? DateTime.now()
+            : DateTime.now(),
         title: json["title"],
         video: json["video"],
         voteAverage: json["vote_average"]?.toDouble(),
@@ -58,36 +60,11 @@ class MovieFromMovieDB {
         "overview": overview,
         "popularity": popularity,
         "poster_path": posterPath,
-        "release_date": "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
+        // ignore: unnecessary_null_comparison
+        "release_date": (releaseDate != null) ? "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}" : null,
         "title": title,
         "video": video,
         "vote_average": voteAverage,
         "vote_count": voteCount,
     };
-}
-
-enum OriginalLanguage {
-    DA,
-    EN,
-    FR,
-    JA
-}
-
-final originalLanguageValues = EnumValues({
-    "da": OriginalLanguage.DA,
-    "en": OriginalLanguage.EN,
-    "fr": OriginalLanguage.FR,
-    "ja": OriginalLanguage.JA
-});
-
-class EnumValues<T> {
-    Map<String, T> map;
-    late Map<T, String> reverseMap;
-
-    EnumValues(this.map);
-
-    Map<T, String> get reverse {
-            reverseMap = map.map((k, v) => MapEntry(v, k));
-            return reverseMap;
-    }
 }
